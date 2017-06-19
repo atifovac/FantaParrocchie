@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping()
 public class MyRestController {
     private Logger logger = LoggerFactory.getLogger(MyRestController.class);
 
     @Autowired
     private HelloServiceImpl service;
 
-    @GetMapping("/ciao")
+    @GetMapping("/check")
     public String helloRestWorld(){
         return service.hello();
     }
