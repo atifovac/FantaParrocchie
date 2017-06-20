@@ -24,15 +24,10 @@ public class PlayerController {
     }
 
     @PutMapping("/")
-    public Long savePlayer(@RequestParam(name = "nome") String name, @RequestParam(name = "cognome") String surname,
-                           @RequestParam(name = "squadraReale") String realTeam,
-                           @RequestParam(name = "squadraFanta", required = false) String fantaTeam) {
-        Player player = new Player();
-        player.setName(name);
-        player.setSurname(surname);
-        player.setRealTeam(realTeam);
-        player.setFantaTeam(fantaTeam);
-        return service.savePlayer(player);
+    public Player savePlayer(@RequestParam(name = "nome") String name, @RequestParam(name = "cognome") String surname,
+                             @RequestParam(name = "squadraReale") String realTeam,
+                             @RequestParam(name = "nomeFantaSquadra", required = false) String fantaTeamName) {
+        return service.savePlayer(name, surname, realTeam, fantaTeamName);
     }
 
     @DeleteMapping("/{id}")

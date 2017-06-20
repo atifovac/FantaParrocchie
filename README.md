@@ -29,13 +29,29 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
         * String nome
         * String cognome
         * String squadraReale
-        * String squadraFanta (se il giocatore è svincolato passare null o stringa vuota o "svincolato")
+        * String nomeFantaSquadra (se il giocatore è svincolato passare null o stringa vuota o "svincolato")
 * DELETE /player/{id}
     * permette di cancellare il giocatore con quell'id dal DB
+    
+    
+* GET /fantasquadra/{nome}
+    * restituisce la fantasquadra con quel nome
+* GET /fantasquadra/
+    * restituisce una lista di tutte le fantasquadre presenti nel DB
+* PUT /fantasquadra/
+    * permette il salvataggio di una fantasquadra con i dati passati
+    * INPUT:
+        * String nome
+        * String presidente
+        * Long fantaSoldi (da indicare in unità)
+* DELETE /fantasquadra/{nome}
+    * permette di cancellare la fantasquadra con quel nome dal DB
 
 ### PROSSIMI SVILUPPI
-1. Inserire il sistema (compreso di db (?)) in un docker in modo da evitare possibili configurazioni arbitrarie del db.
-2. Popolare il DB
-3. Creare tutta la parte di calcolo dei punti, rose, formazioni, ecc...
-4. Fornire tutti gli endpoint necessari
-5. Implementare la parte di security
+1. Inserire il sistema (backend + DB + futuro frontend) in un docker ciascuno (da gestire tramite docker-compose) 
+       in modo da evitare possibili configurazioni arbitrarie del db.
+1. Popolare il DB
+1. Creare tutta la parte di calcolo dei punti, rose, formazioni, ecc...
+1. Fornire tutti gli endpoint necessari
+1. Implementare la parte di security
+1. Verificare che i dati inseriti siano accettabili (no duplicazioni)

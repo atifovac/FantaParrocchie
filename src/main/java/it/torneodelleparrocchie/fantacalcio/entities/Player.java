@@ -10,8 +10,8 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Player.getAllByRealTeam",
                 query = "select p from Player p where p.realTeam=:realTeam"),
-        @NamedQuery(name = "Player.getAllByFantaTeam",
-                query = "select p from Player p where p.fantaTeam=:fantaTeam")
+        @NamedQuery(name = "Player.getAllByFantaTeamName",
+                query = "select p from Player p where p.fantaTeam.name=:fantaTeam")
 })
 public class Player {
 
@@ -26,11 +26,16 @@ public class Player {
     @Column(name = "cognome")
     private String surname;
 
+
+    @Column(name = "ruolo")
+    private String role;
+
     @Column(name = "squadra_reale")
     private String realTeam;
 
-    @Column(name = "squadra_fanta")
-    private String fantaTeam;
+    @ManyToOne
+    @JoinColumn(name = "fanta_squadra", referencedColumnName = "nome")
+    private FantaTeam fantaTeam;
 
     public Long getId() {
         return id;
@@ -60,11 +65,23 @@ public class Player {
         this.realTeam = realTeam;
     }
 
-    public String getFantaTeam() {
+    public FantaTeam getFantaTeam() {
         return fantaTeam;
     }
 
-    public void setFantaTeam(String fantaTeam) {
-        this.fantaTeam = (("".equals(fantaTeam) || fantaTeam == null) ? "svincolato" : fantaTeam);
+    public void setFantaTeam(FantaTeam fantaTeam) {
+        this.fantaTeam = ((fantaTeam == null || "".equals(fantaTeam.getName())) ? new FantaTeam() : fantaTeam);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", role='" + role + '\'' +
+                ", realTeam='" + realTeam + '\'' +
+                ", fantaTeam=" + fantaTeam +
+                '}';
     }
 }
