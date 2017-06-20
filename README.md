@@ -6,8 +6,9 @@
 
 Il modo più facile per eseguire il jar é caricare il progetto in un IDE ed eseguire la  classe FantacalcioApplication.
 
-L'unica cosa di cui necessita è un database mariaDB locale. I dati di configurazione del database sono presenti nel file
- ./resources/application.yml
+L'unica cosa di cui necessita è un database [mariaDB](https://mariadb.com/downloads) locale. I dati di configurazione 
+del database sono presenti nel file 
+[application.yml](https://github.com/atifovac/FantaParrocchie/blob/master/src/main/resources/application.yml)
  
 N.B. è consigliato attenersi alla configurazione del DB fornita.
 
@@ -17,12 +18,18 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
 
 * GET /check
     * endpoint di prova per vedere se il sistema é correttamente configurato
+    * OUTPUT:
+        * "Hello, World!!"
 
 
 * GET /player/{id}
     * restituisce il giocatore con quell'id
+    * OUTPUT:
+        * Player
 * GET /player/
     * restituisce una lista di tutti i giocatori presenti nel DB
+    * OUTPUT:
+        * List\<Player>
 * PUT /player/
     * permette il salvataggio di un giocatore con i dati passati
     * INPUT:
@@ -30,20 +37,28 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
         * String cognome
         * String squadraReale
         * String nomeFantaSquadra (se il giocatore è svincolato passare null o stringa vuota o "svincolato")
+    * OUTPUT:
+        * Player
 * DELETE /player/{id}
     * permette di cancellare il giocatore con quell'id dal DB
     
     
 * GET /fantasquadra/{nome}
     * restituisce la fantasquadra con quel nome
+    * OUTPUT:
+        * FantaTeam
 * GET /fantasquadra/
     * restituisce una lista di tutte le fantasquadre presenti nel DB
+    * OUTPUT:
+        * List\<FantaTeam>
 * PUT /fantasquadra/
     * permette il salvataggio di una fantasquadra con i dati passati
     * INPUT:
         * String nome
         * String presidente
-        * Long fantaSoldi (da indicare in unità)
+        * Long fantaSoldi \[da indicare in unità]
+    * OUTPUT:
+        * FantaTeam
 * DELETE /fantasquadra/{nome}
     * permette di cancellare la fantasquadra con quel nome dal DB
 
@@ -55,3 +70,4 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
 1. Fornire tutti gli endpoint necessari
 1. Implementare la parte di security
 1. Verificare che i dati inseriti siano accettabili (no duplicazioni)
+1. Implementare la possibilità di aggiungere delle immagini al DB

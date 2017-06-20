@@ -45,11 +45,6 @@ public class PlayerServiceImpl implements PlayerService{
         playerRepository.delete(id);
     }
 
-    public void deletePlayer(Player player) {
-        logger.info("Deleting player with id = ", player.getId());
-        playerRepository.delete(player);
-    }
-
     public Player savePlayer(String name, String surname, String realTeam, String fantaTeamName) {
         Player player = new Player();
         player.setName(name);
