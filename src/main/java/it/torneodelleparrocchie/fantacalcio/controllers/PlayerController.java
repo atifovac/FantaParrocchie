@@ -26,7 +26,7 @@ public class PlayerController {
     @PutMapping("/")
     public Long savePlayer(@RequestParam(name = "nome") String name, @RequestParam(name = "cognome") String surname,
                            @RequestParam(name = "squadraReale") String realTeam,
-                           @RequestParam(name = "squadraFanta") String fantaTeam) {
+                           @RequestParam(name = "squadraFanta", required = false) String fantaTeam) {
         Player player = new Player();
         player.setName(name);
         player.setSurname(surname);

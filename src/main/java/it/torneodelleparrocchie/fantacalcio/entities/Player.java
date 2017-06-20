@@ -3,12 +3,16 @@ package it.torneodelleparrocchie.fantacalcio.entities;
  * Created by dsalvatore on 19/06/17.
  */
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "giocatore")
+@NamedQueries({
+        @NamedQuery(name = "Player.getAllByRealTeam",
+                query = "select p from Player p where p.realTeam=:realTeam"),
+        @NamedQuery(name = "Player.getAllByFantaTeam",
+                query = "select p from Player p where p.fantaTeam=:fantaTeam")
+})
 public class Player {
 
     @Id

@@ -1,8 +1,8 @@
-#**FANTAPARROCCHIE**
+# **FANTAPARROCCHIE**
 
-##**IL FANTACALCIO DEL TORNEO DELLE PARROCCHIE**
+## **IL FANTACALCIO DEL TORNEO DELLE PARROCCHIE**
 
-###ESEGUIRE IL JAR
+### ESEGUIRE IL JAR
 
 Il modo più facile per eseguire il jar é caricare il progetto in un IDE ed eseguire la  classe FantacalcioApplication.
 
@@ -11,7 +11,7 @@ L'unica cosa di cui necessita è un database mariaDB locale. I dati di configura
  
 N.B. è consigliato attenersi alla configurazione del DB fornita.
 
-###ENDPOINTS
+### ENDPOINTS
 
 Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
 
@@ -33,7 +33,7 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
 * DELETE /player/{id}
     * permette di cancellare il giocatore con quell'id dal DB
 
-###PROSSIMI SVILUPPI
+### PROSSIMI SVILUPPI
 1. Inserire il sistema (compreso di db (?)) in un docker in modo da evitare possibili configurazioni arbitrarie del db.
 2. Popolare il DB
 3. Creare tutta la parte di calcolo dei punti, rose, formazioni, ecc...
