@@ -16,7 +16,7 @@ import java.util.List;
 public class FantaTeamController {
 
     @Autowired
-    FantaTeamService service;
+    private FantaTeamService service;
 
     @GetMapping("/{nome}")
     public FantaTeam getFantaTeam(@PathVariable("nome") String name) {
@@ -29,14 +29,22 @@ public class FantaTeamController {
     }
 
     @PutMapping("/")
-    public FantaTeam saveFantaTeam(@RequestParam(value = "nome", required = false) String name,
-                                   @RequestParam(value = "presidente", required = false) String president,
+    public FantaTeam newFantaTeam(@RequestParam(value = "nome") String name,
+                                   @RequestParam(value = "presidente") String president,
                                    @RequestParam(value = "fantasoldi", required = false) Long fantaMoney) {
-        return service.saveFantaTeam(name, president, fantaMoney);
+        return service.saveFantaTeam(null, name, president, fantaMoney);
     }
 
     @DeleteMapping("/{nome}")
-    public void saveFantaTeam(@PathVariable("nome") String name) {
+    public void deleteFantaTeam(@PathVariable("nome") String name) {
         service.deleteFantaTeam(name);
+    }
+
+    @PostMapping("/{vecchioNome}")
+    public FantaTeam updateFantaTeam(@PathVariable(value = "vecchioNome") String oldName,
+                                     @RequestParam(value = "nome", required = false) String name,
+                                     @RequestParam(value = "presidente", required = false) String president,
+                                     @RequestParam(value = "fantasoldi", required = false) Long fantaMoney) {
+        return service.saveFantaTeam(oldName, name, president, fantaMoney);
     }
 }

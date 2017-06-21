@@ -7,16 +7,12 @@ import java.io.Serializable;
 @Table(name = "fantasquadra")
 public class FantaTeam implements Serializable {
 
-    public FantaTeam() {
-        this.name = "svincolato";
-    }
-
     @Id
     @Column(name = "nome")
     private String name;
 
-    @Column(name = "presidente")
-    private String president;
+    @OneToOne
+    private User president;
 
     @Column(name = "fanta_soldi")
     private Long fantaMoney;
@@ -29,11 +25,14 @@ public class FantaTeam implements Serializable {
         this.name = name;
     }
 
-    public String getPresident() {
+    public User getPresident() {
         return president;
     }
 
-    public void setPresident(String president) {
+    public void setPresident(User president) {
+        if (name.equalsIgnoreCase("svincolato")) {
+            throw new IllegalStateException("The team \"" + name + "\" cannot have a president");
+        }
         this.president = president;
     }
 
@@ -42,6 +41,9 @@ public class FantaTeam implements Serializable {
     }
 
     public void setFantaMoney(Long fantaMoney) {
+        if (name.equalsIgnoreCase("svincolato")) {
+            throw new IllegalStateException("The team \"" + name + "\" cannot have money");
+        }
         this.fantaMoney = fantaMoney;
     }
 

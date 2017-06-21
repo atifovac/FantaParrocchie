@@ -11,7 +11,10 @@ import javax.persistence.*;
         @NamedQuery(name = "Player.getAllByRealTeam",
                 query = "select p from Player p where p.realTeam=:realTeam"),
         @NamedQuery(name = "Player.getAllByFantaTeamName",
-                query = "select p from Player p where p.fantaTeam.name=:fantaTeam")
+                query = "select p from Player p where p.fantaTeam.name=:fantaTeam"),
+        @NamedQuery(name = "Player.getByNameAndSurnameAndRoleAndRealTeam",
+                query = "select p from Player p " +
+                        "where p.name=:name and p.surname=:surname and p.role=:role and p.realTeam=:realTeam")
 })
 public class Player {
 
@@ -41,12 +44,17 @@ public class Player {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !name.isEmpty())
+            this.name = name;
     }
 
     public String getSurname() {
@@ -54,7 +62,17 @@ public class Player {
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        if (surname != null && !surname.isEmpty())
+            this.surname = surname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        if (role != null && !role.isEmpty())
+            this.role = role;
     }
 
     public String getRealTeam() {
@@ -62,7 +80,8 @@ public class Player {
     }
 
     public void setRealTeam(String realTeam) {
-        this.realTeam = realTeam;
+        if (realTeam != null && !realTeam.isEmpty())
+            this.realTeam = realTeam;
     }
 
     public FantaTeam getFantaTeam() {
@@ -70,7 +89,8 @@ public class Player {
     }
 
     public void setFantaTeam(FantaTeam fantaTeam) {
-        this.fantaTeam = ((fantaTeam == null || "".equals(fantaTeam.getName())) ? new FantaTeam() : fantaTeam);
+        if (fantaTeam != null && !fantaTeam.getName().isEmpty())
+            this.fantaTeam = fantaTeam;
     }
 
     @Override

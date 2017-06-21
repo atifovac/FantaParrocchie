@@ -14,7 +14,7 @@ N.B. è consigliato attenersi alla configurazione del DB fornita.
 
 ### ENDPOINTS
 
-Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
+Tutti gli endpoint, per ora, hanno come prefisso "http://localhost:8080/rest"
 
 * GET /check
     * endpoint di prova per vedere se il sistema é correttamente configurato
@@ -39,6 +39,15 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
         * String nomeFantaSquadra (se il giocatore è svincolato passare null o stringa vuota o "svincolato")
     * OUTPUT:
         * Player
+* POST /player/{id}
+    * permette l'aggiornamento dei dati relativi a un giocatore
+    * INPUT \[tutti facoltativi\]:
+        * String nome
+        * String cognome
+        * String squadraReale
+        * String nomeFantaSquadra (se il giocatore è svincolato passare null o stringa vuota o "svincolato")
+    * OUTPUT:
+        * Player
 * DELETE /player/{id}
     * permette di cancellare il giocatore con quell'id dal DB
     
@@ -54,6 +63,14 @@ Tutti gli endpoint, per ora, hanno come prefisso http://localhost:8080/rest
 * PUT /fantasquadra/
     * permette il salvataggio di una fantasquadra con i dati passati
     * INPUT:
+        * String nome
+        * String presidente
+        * Long fantaSoldi \[da indicare in unità]
+    * OUTPUT:
+        * FantaTeam
+* POST /fantasquadra/{vecchioNome}
+    * permette l'aggiornamento dei dati relativi a  una fantasquadra
+    * INPUT \[tutti facoltativi\]:
         * String nome
         * String presidente
         * Long fantaSoldi \[da indicare in unità]

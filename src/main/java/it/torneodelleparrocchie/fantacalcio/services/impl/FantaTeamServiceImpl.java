@@ -6,6 +6,8 @@ package it.torneodelleparrocchie.fantacalcio.services.impl;
 import it.torneodelleparrocchie.fantacalcio.entities.FantaTeam;
 import it.torneodelleparrocchie.fantacalcio.repositories.FantaTeamRepository;
 import it.torneodelleparrocchie.fantacalcio.repositories.PlayerRepository;
+import it.torneodelleparrocchie.fantacalcio.repositories.UserRepository;
+import it.torneodelleparrocchie.fantacalcio.savers.FantaTeamSaver;
 import it.torneodelleparrocchie.fantacalcio.services.FantaTeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,14 +20,22 @@ import java.util.List;
 public class FantaTeamServiceImpl implements FantaTeamService {
     private Logger logger = LoggerFactory.getLogger(FantaTeamServiceImpl.class);
 
-    @Autowired
-    private FantaTeamRepository repository;
+    private final FantaTeamRepository fantaTeamRepository;
+
+    private final PlayerRepository playerRepository;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private PlayerRepository playerRepository;
+    public FantaTeamServiceImpl(FantaTeamRepository fantaTeamRepository, PlayerRepository playerRepository, UserRepository userRepository) {
+        this.fantaTeamRepository = fantaTeamRepository;
+        this.playerRepository = playerRepository;
+        this.userRepository = userRepository;
+    }
 
+    @Override
     public FantaTeam getFantaTeam(String name) {
-        FantaTeam fantaTeam = repository.findOne(name);
+        FantaTeam fantaTeam = fantaTeamRepository.findOne(name);
 
         try {
             logger.info("getFantaTeam, result" + fantaTeam.getName());
@@ -36,29 +46,29 @@ public class FantaTeamServiceImpl implements FantaTeamService {
         return fantaTeam;
     }
 
+    @Override
     public List<FantaTeam> getFantaTeamList() {
-        List<FantaTeam> fantaTeamList = (List<FantaTeam>) repository.findAll();
+        List<FantaTeam> fantaTeamList = (List<FantaTeam>) fantaTeamRepository.findAll();
 
         logger.info("getFantaTeamList, result size" + fantaTeamList.size());
 
         return fantaTeamList;
     }
 
-    public FantaTeam saveFantaTeam(String name, String president, Long fantaMoney) {
-        FantaTeam fantaTeam = new FantaTeam();
-        if (name != null && !name.equals("")) {
-            fantaTeam.setName(name);
-        }
-        fantaTeam.setPresident(president);
-        fantaTeam.setFantaMoney(fantaMoney);
-        logger.info("saveFantaTeam, " + fantaTeam.toString());
-        return repository.save(fantaTeam);
+    @Override
+    public FantaTeam saveFantaTeam(String oldName, String name, String presidentUsername, Long fantaMoney) {
+        return FantaTeamSaver.create(oldName, fantaTeamRepository, userRepository)
+                .name(name)
+                .president(presidentUsername)
+                .fantaMoney(fantaMoney)
+                .save();
     }
 
+    @Override
     public void deleteFantaTeam(String name) {
-        logger.info("deleteFantaTeam, removing dependencies");
+        logger.info("saveFantaTeam, removing dependencies");
         playerRepository.getAllByFantaTeamName(name).forEach(player -> player.setFantaTeam(new FantaTeam()));
-        logger.info("deleteFantaTeam, deleting FantaTeam " + name);
-        repository.delete(name);
+        logger.info("saveFantaTeam, deleting FantaTeam " + name);
+        fantaTeamRepository.delete(name);
     }
 }

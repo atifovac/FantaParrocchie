@@ -7,6 +7,7 @@ import it.torneodelleparrocchie.fantacalcio.entities.Player;
 import it.torneodelleparrocchie.fantacalcio.repositories.FantaTeamRepository;
 import it.torneodelleparrocchie.fantacalcio.repositories.PlayerRepository;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
+import it.torneodelleparrocchie.fantacalcio.savers.PlayerSaver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,41 +17,52 @@ import java.util.List;
 
 @Service
 public class PlayerServiceImpl implements PlayerService{
+
     private Logger logger = LoggerFactory.getLogger(PlayerServiceImpl.class);
 
-    @Autowired
-    private PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
+
+    private final FantaTeamRepository fantaTeamRepository;
 
     @Autowired
-    private FantaTeamRepository fantaTeamRepository;
+    public PlayerServiceImpl(PlayerRepository playerRepository, FantaTeamRepository fantaTeamRepository) {
+        this.playerRepository = playerRepository;
+        this.fantaTeamRepository = fantaTeamRepository;
+    }
 
+    @Override
     public Player getPlayer(Long id) {
         logger.info("Searching for player with id = " + id);
         return playerRepository.findOne(id);
     }
 
+    @Override
     public List<Player> getPlayersList() {
         logger.info("Searching for all players");
         return (List<Player>) playerRepository.findAll();
     }
 
+    @Override
     public Long savePlayer(Player player) {
         Long id = playerRepository.save(player).getId();
         logger.info("Inserting player with id = " + id);
         return id;
     }
 
+    @Override
     public void deletePlayer(Long id) {
         logger.info("Deleting player with id = ", id);
         playerRepository.delete(id);
     }
 
-    public Player savePlayer(String name, String surname, String realTeam, String fantaTeamName) {
-        Player player = new Player();
-        player.setName(name);
-        player.setSurname(surname);
-        player.setRealTeam(realTeam);
-        player.setFantaTeam(fantaTeamRepository.findOne(fantaTeamName));
-        return playerRepository.save(player);
+    @Override
+    public Player savePlayer(Long id, String name, String surname, String role, String realTeam, String fantaTeamName) {
+        return PlayerSaver.create(id, fantaTeamRepository, playerRepository)
+                .name(name)
+                .surname(surname)
+                .role(role)
+                .realTeam(realTeam)
+                .fantaTeam(fantaTeamName)
+                .save();
     }
 }
