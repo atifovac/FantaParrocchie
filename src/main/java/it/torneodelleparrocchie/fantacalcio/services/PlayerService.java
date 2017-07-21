@@ -16,5 +16,5 @@ public interface PlayerService {
 
     void deletePlayer(Long id);
 
-    Player savePlayer(Long id, String name, String surname, String role, String realTeam, String fantaTeamName);
+    Player savePlayer(Long id, String name, String surname, String rosterRole, String formationRole, String realTeam, Long value);
 }

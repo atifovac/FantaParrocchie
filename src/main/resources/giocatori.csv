@@ -1,0 +1,100 @@
+Ruolo Rosa,Cognome,Nome,Squadra,Quotazione,Ruolo Formazione
+POR,CAPECCE,Andrea,Carmelo C,12,POR
+POR,MEMEO,Lorenzo,Carmelo C,1,POR
+POR,VERLENGIA,Mimmo,Sacro Cuore Stomauro,10,POR
+POR,LO CONTE,Raffaele,San Francesco,16,POR
+POR,MELFI,Michele,Sacro Cuore,16,POR
+POR,ERCOLESSI,Stefano,San Pietro,18,POR
+POR,VALERIANI,Lorenzo,NoLimits,12,POR
+POR,PREZIOSO,Gianluca,San Timoteo,14,POR
+DIF,TESTA,Amedeo,Carmelo C,16,DIF
+DIF,CORDELLA,Andrea,Carmelo C,9,DIF
+DIF,GALANTE,Andrea,Carmelo C,5,DIF
+DIF,COCCARO,Antonio,Carmelo C,10,DIF
+DIF,DE LUCA,Guglielmo,Sacro Cuore Stomauro,10,DIF
+DIF,CICCHINO,Giuseppe,Sacro Cuore Stomauro,7,DIF
+DIF,IOVINE,Nicola,Sacro Cuore Stomauro,4,DIF
+DIF,D'ANTONIO,Simone,Sacro Cuore Stomauro,3,DIF
+DIF,LO CONTE,Giulio,San Francesco,5,DIF
+DIF,SORGETTI,Antonio,San Francesco,7,DIF
+DIF,SASSANO,Carlo,San Francesco,9,DIF
+DIF,GABSI,Zied,San Francesco,8,DIF
+DIF,DI SALVATORE,Roberto,Sacro Cuore,6,DIF
+DIF,FULGORI,Giuseppe,Sacro Cuore,13,DIF
+DIF,VALENTINI,Alessandro,Sacro Cuore,3,DIF
+DIF,BUCCELLA,Marco,Sacro Cuore,7,DIF
+DIF,CATALDO,Paolo,San Pietro,6,DIF
+DIF,CANNARSA,Francesco,San Pietro,6,DIF
+DIF,RICCIUTI,Marcello,San Pietro,5,DIF
+DIF,CATULLO,Bartolo,San Pietro,10,DIF
+DIF,D'ANGELO,Francesco,San Pietro,11,DIF
+DIF,MAZZARIELLO,Roberto,NoLimits,8,DIF
+DIF,DI ROSARIO,Pio,NoLimits,5,DIF
+DIF,DEL GRANDE,Giuseppe,NoLimits,4,DIF
+DIF,DI LISA,Vincenzo,NoLimits,4,DIF
+DIF,MUGNANO,Luigi,San Timoteo,17,DIF
+DIF,CASERIO,Nicola,San Timoteo,5,DIF
+DIF,AMORUSO,Antonio,San Timoteo,8,DIF
+DIF,FIORELLI,Davide,San Timoteo,3,DIF
+DIF,D'AMORE,Antonio,Carmelo B,3,DIF
+DIF,PAOLITTO,Antonio,Carmelo B,3,DIF
+DIF,SALVATORE,Daniele,Carmelo B,5,DIF
+DIF,D'ABRAMO,Marco,Carmelo B,5,DIF
+DIF,MASTROPAOLO,Marco,Carmelo B,7,DIF
+CEN,COLASURDO,Michele,Carmelo C,16,CEN
+CEN,COCCARO,Fabrizio,Carmelo C,8,CEN
+CEN,BARTOLLINO,Giovanni,Carmelo C,5,CEN
+CEN,PASCIULLO ,Thomas,Sacro Cuore Stomauro,5,CEN
+CEN,VERLENGIA,Massimiliano,Sacro Cuore Stomauro,9,CEN
+CEN,CELLAI,Fabrizio,Sacro Cuore Stomauro,12,CEN
+CEN,D'ETTORRE,Alessandro,Sacro Cuore Stomauro,4,CEN
+CEN,DI MICHELE,Federico,Sacro Cuore Stomauro,2,CEN
+CEN,MAREGLIA,Emanuele,San Francesco,9,CEN
+CEN,LETTO,Giuseppe,San Francesco,12,CEN
+CEN,CICCARELLI,Cristian,San Francesco,3,CEN
+CEN,ROBERTI,Stefano,San Francesco,9,CEN
+CEN,DE ROSA,Raffaele,Sacro Cuore,19,CEN
+CEN,BUSICO,Raffaele,Sacro Cuore,9,CEN
+CEN,GUIDOTTI,Daniele,Sacro Cuore,5,CEN
+CEN,RECCHIA,Antonello,San Pietro,15,CEN
+CEN,D'ASCANIO,Luca,San Pietro,19,CEN
+CEN,SPADACCINO,Giovanni,San Pietro,20,CEN
+CEN,D'AGOSTINO,Benny,NoLimits,4,CEN
+CEN,SIRAVO,Donato,NoLimits,8,CEN
+CEN,ARMILLOTTA,Andrea,NoLimits,10,CEN
+CEN,ARMILLOTTA,Daniele,NoLimits,6,CEN
+CEN,LA FRATTA ,Michele,NoLimits,13,CEN
+CEN,VERINI,Marco,San Timoteo,16,CEN
+CEN,MUGNANO,Alessandro,San Timoteo,11,CEN
+CEN,METERE,Enzo,San Timoteo,17,CEN
+CEN,MINCHILLO,Fabio,Carmelo B,8,CEN
+CEN,CAPRIOLI,Gennaro,Carmelo B,12,CEN
+CEN,CLISSA,Luca,Carmelo B,10,CEN
+CEN,GIACOMETTI,Mario,Carmelo B,9,CEN
+CEN,MUCCI,Rocco,Carmelo B,11,CEN
+ATT,VERLENGIA,Davide,Carmelo C,6,ATT
+ATT,MELFI,Leo,Carmelo C,38,ATT
+ATT,TISCI,Fabio,Sacro Cuore Stomauro,8,ATT
+ATT,PORRINO,Nicola,Sacro Cuore Stomauro,9,ATT
+ATT,D'AIMMO,Florindo,San Francesco,16,ATT
+ATT,SAMPAOLESI,Danilo,San Francesco,15,ATT
+ATT,MALINCONICO,Iacopo,San Francesco,15,ATT
+ATT,BIBBò,Dario,Sacro Cuore,24,ATT
+ATT,RICCIARDI ,Mariano,San Pietro,20,ATT
+ATT,CATULLO,Alfonso,San Pietro,40,ATT
+ATT,RECCHIA,Gianluca,San Pietro,18,ATT
+ATT,SIRAVO,Antonio,NoLimits,16,ATT
+ATT,ROMANO,Vittorio,NoLimits,11,ATT
+ATT,IMPICCIATORE,Andrea,NoLimits,20,ATT
+ATT,GUIDOTTI,Jacopo,San Timoteo,22,ATT
+ATT,MATTIA,Nicola,San Timoteo,32,ATT
+ATT,FELICE,Stefano,San Timoteo,23,ATT
+ATT,FIORELLI,Lorenzo,San Timoteo,14,ATT
+ATT,IZZI,Pierluigi,Carmelo B,17,ATT
+ATT,LIGUORI,Andrea,Carmelo B,16,ATT
+EST,CAMPITELLI,Antonio,Carmelo C,22,ATT
+EST,DE VITA,Gianni,Sacro Cuore Stomauro,23,CEN
+EST,CIARLA,Stefano,San Francesco,14,CEN
+EST,ABUYA,Godspower,Sacro Cuore,18,CEN
+EST,RUOCCO,Davide,San Pietro,21,ATT
+EST,DI GIOIA,Marco,San Timoteo,9,CEN

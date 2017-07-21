@@ -10,9 +10,12 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Player.getAllByRealTeam",
                 query = "select p from Player p where p.realTeam=:realTeam"),
-        @NamedQuery(name = "Player.getByNameAndSurnameAndRoleAndRealTeam",
+        @NamedQuery(name = "Player.getByNameAndSurnameAndRosterRoleAndRealTeam",
                 query = "select p from Player p " +
-                        "where p.name=:name and p.surname=:surname and p.role=:role and p.realTeam=:realTeam")
+                        "where p.name=:name and p.surname=:surname and p.rosterRole=:role and p.realTeam=:realTeam"),
+        @NamedQuery(name = "Player.getByNameAndSurnameAndFormationRoleAndRealTeam",
+                query = "select p from Player p " +
+                        "where p.name=:name and p.surname=:surname and p.formationRole=:role and p.realTeam=:realTeam")
 })
 public class Player {
 
@@ -27,12 +30,17 @@ public class Player {
     @Column(name = "cognome")
     private String surname;
 
+    @Column(name = "ruolo_formazione")
+    private String formationRole;
 
-    @Column(name = "ruolo")
-    private String role;
+    @Column(name = "ruolo_rosa")
+    private String rosterRole;
 
     @Column(name = "squadra_reale")
     private String realTeam;
+
+    @Column(name = "quotazione")
+    private Long value;
 
     public Long getId() {
         return id;
@@ -60,13 +68,20 @@ public class Player {
             this.surname = surname;
     }
 
-    public String getRole() {
-        return role;
+    public String getRosterRole() {
+        return rosterRole;
     }
 
-    public void setRole(String role) {
-        if (role != null && !role.isEmpty())
-            this.role = role;
+    public void setRosterRole(String rosterRole) {
+        this.rosterRole = rosterRole;
+    }
+
+    public String getFormationRole() {
+        return formationRole;
+    }
+
+    public void setFormationRole(String formationRole) {
+        this.formationRole = formationRole;
     }
 
     public String getRealTeam() {
@@ -78,14 +93,24 @@ public class Player {
             this.realTeam = realTeam;
     }
 
+    public Long getValue() {
+        return value;
+    }
+
+    public void setValue(Long value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", role='" + role + '\'' +
+                ", formationRole='" + formationRole + '\'' +
+                ", rosterRole='" + rosterRole + '\'' +
                 ", realTeam='" + realTeam + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

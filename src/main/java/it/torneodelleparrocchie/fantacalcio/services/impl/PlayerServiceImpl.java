@@ -55,14 +55,16 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public Player savePlayer(Long id, String name, String surname, String role, String realTeam, String fantaTeamName) {
-        /*return PlayerSaver.create(id, fantaTeamRepository, playerRepository)
-                .name(name)
-                .surname(surname)
-                .role(role)
-                .realTeam(realTeam)
-                .save();*/
-        logger.error("not yet implemented");
-        return null;
+    public Player savePlayer(Long id, String name, String surname, String rosterRole, String formationRole, String realTeam, Long value) {
+        Player player = new Player();
+        player.setId(id);
+        player.setName(name);
+        player.setSurname(surname);
+        player.setRosterRole(rosterRole);
+        player.setFormationRole(formationRole);
+        player.setRealTeam(realTeam);
+        player.setValue(value);
+        logger.info(String.format("saved player %s %s", name, surname));
+        return playerRepository.save(player);
     }
 }
