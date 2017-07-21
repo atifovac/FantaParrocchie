@@ -1,6 +1,7 @@
 package it.torneodelleparrocchie.fantacalcio.controllers;
 
 import it.torneodelleparrocchie.fantacalcio.entities.FantaTeam;
+import it.torneodelleparrocchie.fantacalcio.exceptions.FantaException;
 import it.torneodelleparrocchie.fantacalcio.services.FantaTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,9 @@ public class FantaTeamController {
 
     @PutMapping("/")
     public FantaTeam newFantaTeam(@RequestParam(value = "nome") String name,
-                                   @RequestParam(value = "presidente") String president,
-                                   @RequestParam(value = "fantasoldi", required = false) Long fantaMoney) {
+                                  @RequestParam(value = "presidente") String president,
+                                  @RequestParam(value = "fantasoldi", required = false) Long fantaMoney)
+            throws FantaException {
         return service.saveFantaTeam(null, name, president, fantaMoney);
     }
 
@@ -44,7 +46,8 @@ public class FantaTeamController {
     public FantaTeam updateFantaTeam(@PathVariable(value = "vecchioNome") String oldName,
                                      @RequestParam(value = "nome", required = false) String name,
                                      @RequestParam(value = "presidente", required = false) String president,
-                                     @RequestParam(value = "fantasoldi", required = false) Long fantaMoney) {
+                                     @RequestParam(value = "fantasoldi", required = false) Long fantaMoney)
+            throws FantaException {
         return service.saveFantaTeam(oldName, name, president, fantaMoney);
     }
 }

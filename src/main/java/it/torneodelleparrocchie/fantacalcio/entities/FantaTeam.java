@@ -2,9 +2,15 @@ package it.torneodelleparrocchie.fantacalcio.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "fantasquadra")
+@NamedQueries(
+        @NamedQuery(name = "FantaTeam findByPresident",
+                query = "select ft from FantaTeam ft where ft.president=:user"
+        )
+)
 public class FantaTeam implements Serializable {
 
     @Id
@@ -16,6 +22,10 @@ public class FantaTeam implements Serializable {
 
     @Column(name = "fanta_soldi")
     private Long fantaMoney;
+
+    @OneToMany
+    @Column(name = "rosa")
+    private List<Player> roster;
 
     public String getName() {
         return name;
@@ -30,9 +40,6 @@ public class FantaTeam implements Serializable {
     }
 
     public void setPresident(User president) {
-        if (name.equalsIgnoreCase("svincolato")) {
-            throw new IllegalStateException("The team \"" + name + "\" cannot have a president");
-        }
         this.president = president;
     }
 
@@ -41,10 +48,15 @@ public class FantaTeam implements Serializable {
     }
 
     public void setFantaMoney(Long fantaMoney) {
-        if (name.equalsIgnoreCase("svincolato")) {
-            throw new IllegalStateException("The team \"" + name + "\" cannot have money");
-        }
         this.fantaMoney = fantaMoney;
+    }
+
+    public List<Player> getRoster() {
+        return roster;
+    }
+
+    public void setRoster(List<Player> roster) {
+        this.roster = roster;
     }
 
     @Override
@@ -53,6 +65,7 @@ public class FantaTeam implements Serializable {
                 "name='" + name + '\'' +
                 ", president='" + president + '\'' +
                 ", fantaMoney=" + fantaMoney +
+                ", roster=" + roster +
                 '}';
     }
 }

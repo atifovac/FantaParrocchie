@@ -1,6 +1,7 @@
 package it.torneodelleparrocchie.fantacalcio.services;
 
 import it.torneodelleparrocchie.fantacalcio.entities.FantaTeam;
+import it.torneodelleparrocchie.fantacalcio.exceptions.FantaException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface FantaTeamService {
 
     List<FantaTeam> getFantaTeamList();
 
-    FantaTeam saveFantaTeam(String oldName, String name, String president, Long fantaMoney);
+    FantaTeam saveFantaTeam(String oldName, String name, String president, Long fantaMoney) throws FantaException;
 
     void deleteFantaTeam(String name);
 }

@@ -2,7 +2,9 @@
 
 ## **IL FANTACALCIO DEL TORNEO DELLE PARROCCHIE**
 
-### ESEGUIRE IL JAR
+### GETTING STARTED
+
+##### ESEGUIRE IL JAR
 
 Il modo più facile per eseguire il jar é caricare il progetto in un IDE ed eseguire la  classe FantacalcioApplication.
 
@@ -12,6 +14,45 @@ del database sono presenti nel file
  
 N.B. è consigliato attenersi alla configurazione del DB fornita.
 
+##### USARE IL DOCKER
+
+(ATTENZIONE: QUESTE ISTRUZIONI SONO STATE SVILUPPATE PENSANDO AD UN AMBIENTE LINUX, PER ALTRI AMBIENTI NON DOVREBBE 
+CAMBIARE MOLTO COMUNQUE)
+
+Il modo più facile da configurare è utilizzare i container docker.
+
+Per prima cosa installare [docker](https://docs.docker.com/engine/installation/) (community edition dovrebbe andare già 
+bene).
+
+Una volta assicurato che docker c'è ed è funzionante spostarsi nella cartella del progetto (dove è presente il file 
+"Dockerfile") e seguire i passaggi:
+
+1. creare un docker con il database
+
+        $ docker pull mariadb
+1. eseguire il docker con il database
+
+        $ docker run --name fantamariadb -p 3305:3306 -e MYSQL_ROOT_PASSWORD=mypass -d mariadb
+1. creare il database FantaParrocchieDB
+
+    1. entrare nel db passando da mysql
+        
+            $ mysql -h $(docker inspect --format '{{ .NetworkSettings.IPAddress }}' fantamariadb) -u root -p
+            
+    1. eseguire la query
+            
+            CREATE DATABASE FantaParrocchieDB
+
+1. buildare il docker del backend
+
+        $ docker build -t fantacalcio/core:latest .
+    il "." finale è il path alla cartella che contiene il Dockerfile
+1. eseguire il docker del backend
+        
+        $ docker run -v /home/dsalvatore/.m2:/root/.m2 -p 8080:8080 fantacalcio/core
+
+A questo punto è possibile fare le chiamate all'indirizzo in [locale](http://localhost:8080)
+ 
 ### ENDPOINTS
 
 Tutti gli endpoint, per ora, hanno come prefisso "http://localhost:8080/rest"

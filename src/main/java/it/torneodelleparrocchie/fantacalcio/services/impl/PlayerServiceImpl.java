@@ -7,7 +7,6 @@ import it.torneodelleparrocchie.fantacalcio.entities.Player;
 import it.torneodelleparrocchie.fantacalcio.repositories.FantaTeamRepository;
 import it.torneodelleparrocchie.fantacalcio.repositories.PlayerRepository;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
-import it.torneodelleparrocchie.fantacalcio.savers.PlayerSaver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +56,13 @@ public class PlayerServiceImpl implements PlayerService{
 
     @Override
     public Player savePlayer(Long id, String name, String surname, String role, String realTeam, String fantaTeamName) {
-        return PlayerSaver.create(id, fantaTeamRepository, playerRepository)
+        /*return PlayerSaver.create(id, fantaTeamRepository, playerRepository)
                 .name(name)
                 .surname(surname)
                 .role(role)
                 .realTeam(realTeam)
-                .fantaTeam(fantaTeamName)
-                .save();
+                .save();*/
+        logger.error("not yet implemented");
+        return null;
     }
 }

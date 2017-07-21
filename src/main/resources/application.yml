@@ -1,14 +1,14 @@
 spring:
   datasource:
-    url: "jdbc:mariadb://localhost:3306/FantaParrocchieDB"
+    url: "jdbc:mariadb://172.17.0.1:3305/FantaParrocchieDB"
     username: "root"
-    password: "toor"
+    password: "mypass"
     driver-class-name: org.mariadb.jdbc.Driver
   application:
     name: "FantaParocchie"
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 flyway:

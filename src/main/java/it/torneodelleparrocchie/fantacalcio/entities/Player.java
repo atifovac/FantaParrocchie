@@ -10,8 +10,6 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "Player.getAllByRealTeam",
                 query = "select p from Player p where p.realTeam=:realTeam"),
-        @NamedQuery(name = "Player.getAllByFantaTeamName",
-                query = "select p from Player p where p.fantaTeam.name=:fantaTeam"),
         @NamedQuery(name = "Player.getByNameAndSurnameAndRoleAndRealTeam",
                 query = "select p from Player p " +
                         "where p.name=:name and p.surname=:surname and p.role=:role and p.realTeam=:realTeam")
@@ -35,10 +33,6 @@ public class Player {
 
     @Column(name = "squadra_reale")
     private String realTeam;
-
-    @ManyToOne
-    @JoinColumn(name = "fanta_squadra", referencedColumnName = "nome")
-    private FantaTeam fantaTeam;
 
     public Long getId() {
         return id;
@@ -84,15 +78,6 @@ public class Player {
             this.realTeam = realTeam;
     }
 
-    public FantaTeam getFantaTeam() {
-        return fantaTeam;
-    }
-
-    public void setFantaTeam(FantaTeam fantaTeam) {
-        if (fantaTeam != null && !fantaTeam.getName().isEmpty())
-            this.fantaTeam = fantaTeam;
-    }
-
     @Override
     public String toString() {
         return "Player{" +
@@ -101,7 +86,6 @@ public class Player {
                 ", surname='" + surname + '\'' +
                 ", role='" + role + '\'' +
                 ", realTeam='" + realTeam + '\'' +
-                ", fantaTeam=" + fantaTeam +
                 '}';
     }
 }
