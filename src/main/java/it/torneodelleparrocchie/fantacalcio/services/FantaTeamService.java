@@ -15,7 +15,9 @@ public interface FantaTeamService {
 
     List<FantaTeam> getFantaTeamList();
 
-    FantaTeam saveFantaTeam(String oldName, String name, String president, Long fantaMoney) throws FantaException;
+    FantaTeam saveFantaTeam(String oldName, String name, String president, int fantaMoney) throws FantaException;
 
     void deleteFantaTeam(String name);
+
+    void addPlayer(String teamName, String name, String surname) throws FantaException;
 }

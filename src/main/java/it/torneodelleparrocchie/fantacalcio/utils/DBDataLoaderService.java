@@ -1,6 +1,8 @@
 package it.torneodelleparrocchie.fantacalcio.utils;
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
+import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +34,12 @@ public class DBDataLoaderService {
             player.setName(values.get(params.indexOf("Nome")));
             player.setSurname(values.get(params.indexOf("Cognome")));
             player.setFormationRole(values.get(params.indexOf("Ruolo Formazione")));
-            player.setRosterRole(values.get(params.indexOf("Ruolo Rosa")));
-            player.setRealTeam(values.get(params.indexOf("Squadra")));
-            player.setValue(Long.valueOf(values.get(params.indexOf("Quotazione"))));
+            player.setRosterRole(RosterRoleEnum.valueOf(values.get(params.indexOf("Ruolo Rosa"))));
+            player.setRealTeam(RealTeamEnum.valueOf(values.get(params.indexOf("Squadra"))
+                    .trim()
+                    .toUpperCase()
+                    .replace(" ", "_")));
+            player.setValue(Integer.valueOf(values.get(params.indexOf("Quotazione"))));
             playerService.savePlayer(player);
             rowCounter += 1;
         }

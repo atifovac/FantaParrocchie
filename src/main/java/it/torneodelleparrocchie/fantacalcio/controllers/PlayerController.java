@@ -1,7 +1,11 @@
 package it.torneodelleparrocchie.fantacalcio.controllers;
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
+import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
+    private Logger logger = LoggerFactory.getLogger(PlayerController.class);
 
     @Autowired
     private PlayerService service;
@@ -30,8 +35,16 @@ public class PlayerController {
                                @RequestParam(name = "ruoloRosa") String rosterRole,
                                @RequestParam(name = "ruoloFormazione") String formationRole,
                                @RequestParam(name = "squadraReale") String realTeam,
-                               @RequestParam(name = "quotazione") Long value) {
-        return service.savePlayer(id, name, surname, rosterRole, formationRole, realTeam, value);
+                               @RequestParam(name = "quotazione") Integer value) {
+        logger.info(rosterRole.trim().toUpperCase().substring(0, 2));
+        return service.savePlayer(
+                id,
+                name,
+                surname,
+                RosterRoleEnum.valueOf(rosterRole.trim().toUpperCase().substring(0, 2)),
+                formationRole,
+                RealTeamEnum.valueOf(realTeam.trim().toUpperCase().replace(" ", "_")),
+                value);
     }
 
     @PutMapping("/")
@@ -40,8 +53,16 @@ public class PlayerController {
                              @RequestParam(name = "ruoloRosa") String rosterRole,
                              @RequestParam(name = "ruoloFormazione") String formationRole,
                              @RequestParam(name = "squadraReale") String realTeam,
-                             @RequestParam(name = "quotazione") Long value) {
-        return service.savePlayer(null, name, surname, rosterRole, formationRole, realTeam, value);
+                             @RequestParam(name = "quotazione") Integer value) {
+        logger.info(rosterRole.trim().toUpperCase().substring(0, 2));
+        return service.savePlayer(
+                null,
+                name,
+                surname,
+                RosterRoleEnum.valueOf(rosterRole.trim().toUpperCase().substring(0, 2)),
+                formationRole,
+                RealTeamEnum.valueOf(realTeam.trim().toUpperCase().replace(" ", "_")),
+                value);
     }
 
     @DeleteMapping("/{id}")

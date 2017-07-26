@@ -14,9 +14,9 @@ public interface UserService {
 
     List<User> getUserList();
 
-    User newUser(String username, String password, String email);
+    Long newUser(String username, String password, String email);
 
-    User updateUser(String oldUsername, String username, String password, String email);
+    Long updateUser(String oldUsername, String username, String password, String email);
 
     void deleteUser(String username);
 }

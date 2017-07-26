@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/{username}")
     public User getUser(@PathVariable("username") String username) {
@@ -28,14 +32,14 @@ public class UserController {
     }
 
     @PutMapping("/")
-    public User newUser(@RequestParam("username") String username,
+    public Long newUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
         return userService.newUser(username, password, email);
     }
 
     @PostMapping("/{oldUsername}")
-    public User updateUser(@PathVariable("oldUsername") String oldUsername,
+    public Long updateUser(@PathVariable("oldUsername") String oldUsername,
                            @RequestParam("username") String username,
                            @RequestParam("password") String password,
                            @RequestParam("email") String email) {

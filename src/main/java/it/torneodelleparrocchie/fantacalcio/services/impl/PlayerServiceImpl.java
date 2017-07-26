@@ -4,6 +4,8 @@ package it.torneodelleparrocchie.fantacalcio.services.impl;
  */
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
+import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.repositories.FantaTeamRepository;
 import it.torneodelleparrocchie.fantacalcio.repositories.PlayerRepository;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
@@ -55,7 +57,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public Player savePlayer(Long id, String name, String surname, String rosterRole, String formationRole, String realTeam, Long value) {
+    public Player savePlayer(Long id, String name, String surname, RosterRoleEnum rosterRole, String formationRole, RealTeamEnum realTeam, int value) {
         Player player = new Player();
         player.setId(id);
         player.setName(name);

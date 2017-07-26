@@ -5,6 +5,7 @@ package it.torneodelleparrocchie.fantacalcio.services.impl;
 
 import it.torneodelleparrocchie.fantacalcio.entities.User;
 import it.torneodelleparrocchie.fantacalcio.repositories.UserRepository;
+import it.torneodelleparrocchie.fantacalcio.savers.UserSaver;
 import it.torneodelleparrocchie.fantacalcio.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String username) {
-        return userRepository.findOne(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -31,30 +32,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User newUser(String username, String password, String email) {
-        /*User user = UserSaver.create(null, userRepository)
+    public Long newUser(String username, String password, String email) {
+        logger.info("Creating a new user");
+        Long userId = UserSaver.create(null, userRepository)
                 .username(username)
                 .password(password)
                 .email(email)
-                .build();
-        return userRepository.save(user);*/
-        logger.error("not yet implemented");
-        return null;
+                .save();
+        logger.info(String.format("Saved with id %s", userId));
+        return userId;
     }
 
     @Override
-    public User updateUser(String oldUsername, String username, String password, String email) {
-        User user = userRepository.findOne(oldUsername);
+    public Long updateUser(String oldUsername, String username, String password, String email) {
+        User user = userRepository.findByUsername(oldUsername);
         if (user == null) {
             throw new IllegalArgumentException(String.format("User %s didn't exist", oldUsername));
         }
-        /*return UserSaver.create(user, userRepository)
+        return UserSaver.create(user, userRepository)
                 .username(username)
                 .password(password)
                 .email(email)
-                .build();*/
-        logger.error("not yet implemented");
-        return null;
+                .save();
     }
 
     @Override

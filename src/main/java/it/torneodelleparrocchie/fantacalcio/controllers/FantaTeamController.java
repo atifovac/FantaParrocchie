@@ -32,7 +32,7 @@ public class FantaTeamController {
     @PutMapping("/")
     public FantaTeam newFantaTeam(@RequestParam(value = "nome") String name,
                                   @RequestParam(value = "presidente") String president,
-                                  @RequestParam(value = "fantasoldi", required = false) Long fantaMoney)
+                                  @RequestParam(value = "fantasoldi", required = false) int fantaMoney)
             throws FantaException {
         return service.saveFantaTeam(null, name, president, fantaMoney);
     }
@@ -46,8 +46,15 @@ public class FantaTeamController {
     public FantaTeam updateFantaTeam(@PathVariable(value = "vecchioNome") String oldName,
                                      @RequestParam(value = "nome", required = false) String name,
                                      @RequestParam(value = "presidente", required = false) String president,
-                                     @RequestParam(value = "fantasoldi", required = false) Long fantaMoney)
+                                     @RequestParam(value = "fantasoldi", required = false) int fantaMoney)
             throws FantaException {
         return service.saveFantaTeam(oldName, name, president, fantaMoney);
+    }
+
+    @PostMapping("/{nomeSquadra}/add")
+    public void addPlayer(@PathVariable(value = "nomeSquadra") String teamName,
+                          @RequestParam(value = "nome") String name,
+                          @RequestParam(value = "cognome") String surname) throws FantaException {
+        service.addPlayer(teamName, name, surname);
     }
 }

@@ -16,3 +16,5 @@ flyway:
   baseline-version: "1.0"
 server:
   context-path: /rest
+logging:
+  level: debug

@@ -4,6 +4,8 @@ package it.torneodelleparrocchie.fantacalcio.services;
  */
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
+import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 
 import java.util.List;
 
@@ -16,5 +18,5 @@ public interface PlayerService {
 
     void deletePlayer(Long id);
 
-    Player savePlayer(Long id, String name, String surname, String rosterRole, String formationRole, String realTeam, Long value);
+    Player savePlayer(Long id, String name, String surname, RosterRoleEnum rosterRole, String formationRole, RealTeamEnum realTeam, int value);
 }

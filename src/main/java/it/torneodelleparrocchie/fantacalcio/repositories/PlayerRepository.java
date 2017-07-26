@@ -18,4 +18,8 @@ public interface PlayerRepository extends CrudRepository<Player, Long> {
 
     Player getByNameAndSurnameAndRosterRoleAndRealTeam(@Param("name") String name, @Param("surname") String surname,
                                                        @Param("role") String role, @Param("realTeam") String realTeam);
+
+    Player getByNameAndSurname(@Param("name") String name, @Param("surname") String surname);
+
+    List<Player> getByRealTeamAndRosterRole(@Param("realTeam") String realTeam, @Param("rosterRole") String rosterRole);
 }
