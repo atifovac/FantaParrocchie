@@ -113,18 +113,21 @@ public class FantaTeamServiceImpl implements FantaTeamService {
 
     @Override
     public void addPlayer(String teamName, String name, String surname) throws FantaException {
-        logger.debug(String.format("Trying to assign %s %s to team %s", name, surname, teamName));
+        logger.info(String.format("Trying to assign %s %s to team %s", name, surname, teamName));
         Player player = playerRepository.getByNameAndSurname(name, surname);
-        logger.debug("Player found");
+        if (player == null) {
+            throw new FantaException("[GET]", String.format("Il giocatore %s %s non esiste", name, surname));
+        }
+        logger.info("Player found");
         FantaTeam fantaTeam = fantaTeamRepository.findByName(teamName);
-        logger.debug("Team found");
+        logger.info("Team found");
         if (fantaTeam != null) {
             List<Player> rosterByRole = fantaTeam.getRoster()
                     .stream()
                     .filter(player1 ->
                             player1.getRosterRole().getExtended().equals(player.getRosterRole().getExtended()))
                     .collect(Collectors.toList());
-            logger.debug(
+            logger.info(
                     String.format("Team %s have %s players for role %s",
                             teamName,
                             rosterByRole.size(),
@@ -133,9 +136,9 @@ public class FantaTeamServiceImpl implements FantaTeamService {
                 List<Player> roster = fantaTeam.getRoster();
                 roster.add(player);
                 fantaTeam.setRoster(roster);
-                logger.debug("Team's old money amount = %s", fantaTeam.getFantaMoney());
+                logger.info(String.format("Team's old money amount = %s", fantaTeam.getFantaMoney()));
                 fantaTeam.setFantaMoney(fantaTeam.getFantaMoney() - player.getValue());
-                logger.debug("Team's new money amount = %s", fantaTeam.getFantaMoney());
+                logger.info(String.format("Team's new money amount = %s", fantaTeam.getFantaMoney()));
                 fantaTeamRepository.save(fantaTeam);
                 logger.info(String.format("Player %s %s is added to team %s", name, surname, teamName));
             } else {
@@ -144,6 +147,35 @@ public class FantaTeamServiceImpl implements FantaTeamService {
                                 fantaTeam.getName(),
                                 player.getRosterRole().getExtended()));
             }
+        } else {
+            throw new FantaException("[GET]", String.format("La fantasquadra %s non esiste", teamName));
+        }
+    }
+
+    @Override
+    public void removePlayer(String teamName, String name, String surname) throws FantaException {
+        logger.info(String.format("Trying to assign %s %s to team %s", name, surname, teamName));
+        Player player = playerRepository.getByNameAndSurname(name, surname);
+        if (player == null) {
+            throw new FantaException("[GET]", String.format("Il giocatore %s %s non esiste", name, surname));
+        }
+        logger.info("Player found");
+        FantaTeam fantaTeam = fantaTeamRepository.findByName(teamName);
+        logger.info("Team found");
+        if (fantaTeam != null) {
+            logger.info(String.format("Team %s had %s player", teamName, fantaTeam.getRoster().size()));
+            List<Player> newRoster = fantaTeam.getRoster()
+                    .stream()
+                    .filter(player1 ->
+                            !player1.equals(player))
+                    .collect(Collectors.toList());
+            fantaTeam.setRoster(newRoster);
+            logger.info(String.format("Now team %s have %s player", teamName, fantaTeam.getRoster().size()));
+            fantaTeam.setFantaMoney(fantaTeam.getFantaMoney() + player.getValue());
+            logger.info(String.format("Team's new money amount = %s", fantaTeam.getFantaMoney()));
+            fantaTeamRepository.save(fantaTeam);
+            logger.info(String.format("Player %s %s is removed to team %s", name, surname, teamName));
+
         } else {
             throw new FantaException("[GET]", String.format("La fantasquadra %s non esiste", teamName));
         }

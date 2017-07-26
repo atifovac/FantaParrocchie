@@ -57,4 +57,11 @@ public class FantaTeamController {
                           @RequestParam(value = "cognome") String surname) throws FantaException {
         service.addPlayer(teamName, name, surname);
     }
+
+    @PostMapping("/{nomeSquadra}/remove")
+    public void removePlayer(@PathVariable(value = "nomeSquadra") String teamName,
+                             @RequestParam(value = "nome") String name,
+                             @RequestParam(value = "cognome") String surname) throws FantaException {
+        service.removePlayer(teamName, name, surname);
+    }
 }
