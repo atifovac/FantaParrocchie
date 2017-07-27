@@ -44,9 +44,11 @@ public class Player {
     private String formationRole;
 
     @Column(name = "ruolo_rosa")
+    @Enumerated(EnumType.STRING)
     private RosterRoleEnum rosterRole;
 
     @Column(name = "squadra_reale")
+    @Enumerated(EnumType.STRING)
     private RealTeamEnum realTeam;
 
     @Column(name = "quotazione")
