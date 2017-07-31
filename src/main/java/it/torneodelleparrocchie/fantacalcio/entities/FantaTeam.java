@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -41,6 +42,18 @@ public class FantaTeam implements Serializable {
     @Size(max = 13, message = "Non puoi avere più di 13 giocatori [1P+5D+3C+3A+1E")
     private List<Player> roster;
 
+    @Column(name = "modificabile")
+    private Boolean writable;
+
+    @Column(name = "punti_totali")
+    private Float points;
+
+    public FantaTeam() {
+        roster = new ArrayList<>();
+        points = 0.0F;
+        writable = true;
+    }
+
     public String getName() {
         return name;
     }
@@ -61,7 +74,7 @@ public class FantaTeam implements Serializable {
         return fantaMoney;
     }
 
-    public void setFantaMoney(int fantaMoney) {
+    public void setFantaMoney(Integer fantaMoney) {
         this.fantaMoney = fantaMoney;
     }
 
@@ -73,13 +86,30 @@ public class FantaTeam implements Serializable {
         this.roster = roster;
     }
 
+    public boolean isWritable() {
+        return writable;
+    }
+
+    public void setWritable(boolean writable) {
+        this.writable = writable;
+    }
+
+    public Float getPoints() {
+        return points;
+    }
+
+    public void setPoints(Float points) {
+        this.points = points;
+    }
+
     @Override
     public String toString() {
         return "FantaTeam{" +
                 "name='" + name + '\'' +
-                ", president='" + president + '\'' +
+                ", president=" + president +
                 ", fantaMoney=" + fantaMoney +
                 ", roster=" + roster +
+                ", writable=" + writable +
                 '}';
     }
 }

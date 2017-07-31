@@ -3,6 +3,7 @@ package it.torneodelleparrocchie.fantacalcio.entities;
  * Created by dsalvatore on 19/06/17.
  */
 
+import it.torneodelleparrocchie.fantacalcio.enums.FormationRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 
@@ -41,7 +42,8 @@ public class Player {
     private String surname;
 
     @Column(name = "ruolo_formazione")
-    private String formationRole;
+    @Enumerated(EnumType.STRING)
+    private FormationRoleEnum formationRole;
 
     @Column(name = "ruolo_rosa")
     @Enumerated(EnumType.STRING)
@@ -88,11 +90,11 @@ public class Player {
         this.rosterRole = rosterRole;
     }
 
-    public String getFormationRole() {
+    public FormationRoleEnum getFormationRole() {
         return formationRole;
     }
 
-    public void setFormationRole(String formationRole) {
+    public void setFormationRole(FormationRoleEnum formationRole) {
         this.formationRole = formationRole;
     }
 

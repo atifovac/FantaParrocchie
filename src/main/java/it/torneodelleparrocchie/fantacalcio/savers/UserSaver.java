@@ -52,19 +52,19 @@ public class UserSaver {
             }
         }
         this.username = username;
-        logger.info(String.format("Username: %s", username));
+        logger.info("Username: {}", username);
         return this;
     }
 
     public UserSaver password(String password) {
         this.password = password;
-        logger.info(String.format("Password: %s", password));
+        logger.info("Password: {}", password);
         return this;
     }
 
     public UserSaver email(String email) {
         this.email = email;
-        logger.info(String.format("Email: %s", email));
+        logger.info("Email: {}", email);
         return this;
     }
 

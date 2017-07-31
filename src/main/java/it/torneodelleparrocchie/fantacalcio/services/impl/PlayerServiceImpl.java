@@ -4,9 +4,9 @@ package it.torneodelleparrocchie.fantacalcio.services.impl;
  */
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.FormationRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
-import it.torneodelleparrocchie.fantacalcio.repositories.FantaTeamRepository;
 import it.torneodelleparrocchie.fantacalcio.repositories.PlayerRepository;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
 import org.slf4j.Logger;
@@ -23,12 +23,9 @@ public class PlayerServiceImpl implements PlayerService{
 
     private final PlayerRepository playerRepository;
 
-    private final FantaTeamRepository fantaTeamRepository;
-
     @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository, FantaTeamRepository fantaTeamRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
-        this.fantaTeamRepository = fantaTeamRepository;
     }
 
     @Override
@@ -57,7 +54,7 @@ public class PlayerServiceImpl implements PlayerService{
     }
 
     @Override
-    public Player savePlayer(Long id, String name, String surname, RosterRoleEnum rosterRole, String formationRole, RealTeamEnum realTeam, int value) {
+    public Player savePlayer(Long id, String name, String surname, RosterRoleEnum rosterRole, FormationRoleEnum formationRole, RealTeamEnum realTeam, int value) {
         Player player = new Player();
         player.setId(id);
         player.setName(name);
@@ -66,7 +63,12 @@ public class PlayerServiceImpl implements PlayerService{
         player.setFormationRole(formationRole);
         player.setRealTeam(realTeam);
         player.setValue(value);
-        logger.info(String.format("saved player %s %s", name, surname));
+        logger.info("saved player {} {}", name, surname);
         return playerRepository.save(player);
+    }
+
+    @Override
+    public Player getByNameAndSurname(String name, String surname) {
+        return playerRepository.getByNameAndSurname(name, surname);
     }
 }

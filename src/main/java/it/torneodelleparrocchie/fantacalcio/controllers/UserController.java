@@ -31,23 +31,28 @@ public class UserController {
         return userService.getUserList();
     }
 
-    @PutMapping("/")
+    @PostMapping("/new")
     public Long newUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
         return userService.newUser(username, password, email);
     }
 
-    @PostMapping("/{oldUsername}")
-    public Long updateUser(@PathVariable("oldUsername") String oldUsername,
-                           @RequestParam("username") String username,
+    @PostMapping("/{username}/update")
+    public Long updateUser(@PathVariable("username") String oldUsername,
+                           @RequestParam("nuovoUsername") String username,
                            @RequestParam("password") String password,
                            @RequestParam("email") String email) {
         return userService.updateUser(oldUsername, username, password, email);
     }
 
-    @DeleteMapping("/{username}")
+    @PostMapping("/{username}/delete")
     public void updateUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        return userService.login(username, password);
     }
 }

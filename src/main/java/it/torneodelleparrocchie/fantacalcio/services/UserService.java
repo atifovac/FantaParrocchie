@@ -19,4 +19,6 @@ public interface UserService {
     Long updateUser(String oldUsername, String username, String password, String email);
 
     void deleteUser(String username);
+
+    User login(String username, String password);
 }

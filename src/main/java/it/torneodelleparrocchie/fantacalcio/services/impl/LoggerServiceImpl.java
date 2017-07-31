@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoggerServiceImp implements LoggerService {
-    private Logger logger = LoggerFactory.getLogger(LoggerServiceImp.class);
+public class LoggerServiceImpl implements LoggerService {
+    private Logger logger = LoggerFactory.getLogger(LoggerServiceImpl.class);
 
     private final LogRepository logRepository;
 
     @Autowired
-    public LoggerServiceImp(LogRepository logRepository) {
+    public LoggerServiceImpl(LogRepository logRepository) {
         this.logRepository = logRepository;
     }
 
@@ -23,7 +23,7 @@ public class LoggerServiceImp implements LoggerService {
     public void trace(String operation,
                       String information,
                       String message) {
-        logger.trace(String.format("op: \"%s\", info: \"%s\", message: \"%s\"", operation, information, message));
+        logger.trace("op: \"{}\", info: \"{}\", message: \"{}\"", operation, information, message);
         log("TRACE", operation, information, message);
     }
 
@@ -31,7 +31,7 @@ public class LoggerServiceImp implements LoggerService {
     public void debug(String operation,
                       String information,
                       String message) {
-        logger.debug(String.format("op: \"%s\", info: \"%s\", message: \"%s\"", operation, information, message));
+        logger.debug("op: \"{}\", info: \"{}\", message: \"{}\"", operation, information, message);
         log("DEBUG", operation, information, message);
     }
 
@@ -39,7 +39,7 @@ public class LoggerServiceImp implements LoggerService {
     public void info(String operation,
                      String information,
                      String message) {
-        logger.info(String.format("op: \"%s\", info: \"%s\", message: \"%s\"", operation, information, message));
+        logger.info("op: \"{}\", info: \"{}\", message: \"{}\"", operation, information, message);
         log("INFO", operation, information, message);
     }
 
@@ -47,7 +47,7 @@ public class LoggerServiceImp implements LoggerService {
     public void warn(String operation,
                      String information,
                      String message) {
-        logger.warn(String.format("op: \"%s\", info: \"%s\", message: \"%s\"", operation, information, message));
+        logger.warn("op: \"{}\", info: \"{}\", message: \"{}\"", operation, information, message);
         log("WARN", operation, information, message);
     }
 
@@ -55,7 +55,7 @@ public class LoggerServiceImp implements LoggerService {
     public void error(String operation,
                       String information,
                       String message) {
-        logger.error(String.format("op: \"%s\", info: \"%s\", message: \"%s\"", operation, information, message));
+        logger.error("op: \"{}\", info: \"{}\", message: \"{}\"", operation, information, message);
         log("ERROR", operation, information, message);
     }
 

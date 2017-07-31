@@ -10,6 +10,7 @@ import it.torneodelleparrocchie.fantacalcio.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User getUser(String username) {
@@ -36,10 +40,10 @@ public class UserServiceImpl implements UserService {
         logger.info("Creating a new user");
         Long userId = UserSaver.create(null, userRepository)
                 .username(username)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .email(email)
                 .save();
-        logger.info(String.format("Saved with id %s", userId));
+        logger.info("Saved with id {}", userId);
         return userId;
     }
 
@@ -51,7 +55,7 @@ public class UserServiceImpl implements UserService {
         }
         return UserSaver.create(user, userRepository)
                 .username(username)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .email(email)
                 .save();
     }
@@ -59,5 +63,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String username) {
         userRepository.delete(username);
+    }
+
+    @Override
+    public User login(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        if (user == null || passwordEncoder.matches(password, user.getPassword())) {
+            logger.warn("Username o password errati");
+            return null;
+        }
+        return user;
     }
 }

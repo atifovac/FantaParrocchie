@@ -1,6 +1,7 @@
 package it.torneodelleparrocchie.fantacalcio.controllers;
 
 import it.torneodelleparrocchie.fantacalcio.entities.Player;
+import it.torneodelleparrocchie.fantacalcio.enums.FormationRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RealTeamEnum;
 import it.torneodelleparrocchie.fantacalcio.enums.RosterRoleEnum;
 import it.torneodelleparrocchie.fantacalcio.services.PlayerService;
@@ -20,15 +21,19 @@ import java.util.List;
 public class PlayerController {
     private Logger logger = LoggerFactory.getLogger(PlayerController.class);
 
+    private final PlayerService service;
+
     @Autowired
-    private PlayerService service;
+    public PlayerController(PlayerService service) {
+        this.service = service;
+    }
 
     @GetMapping("/{id}")
     public Player getPlayer(@PathVariable Long id) {
         return service.getPlayer(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/update")
     public Player updatePlayer(@PathVariable Long id,
                                @RequestParam(name = "nome") String name,
                                @RequestParam(name = "cognome") String surname,
@@ -42,12 +47,12 @@ public class PlayerController {
                 name,
                 surname,
                 RosterRoleEnum.valueOf(rosterRole.trim().toUpperCase().substring(0, 2)),
-                formationRole,
+                FormationRoleEnum.valueOf(formationRole.trim().toUpperCase().substring(0, 2)),
                 RealTeamEnum.valueOf(realTeam.trim().toUpperCase().replace(" ", "_")),
                 value);
     }
 
-    @PutMapping("/")
+    @PostMapping("/new")
     public Player savePlayer(@RequestParam(name = "nome") String name,
                              @RequestParam(name = "cognome") String surname,
                              @RequestParam(name = "ruoloRosa") String rosterRole,
@@ -60,12 +65,12 @@ public class PlayerController {
                 name,
                 surname,
                 RosterRoleEnum.valueOf(rosterRole.trim().toUpperCase().substring(0, 2)),
-                formationRole,
+                FormationRoleEnum.valueOf(formationRole.trim().toUpperCase().substring(0, 2)),
                 RealTeamEnum.valueOf(realTeam.trim().toUpperCase().replace(" ", "_")),
                 value);
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public void deletePlayer(@PathVariable Long id) {
         service.deletePlayer(id);
     }

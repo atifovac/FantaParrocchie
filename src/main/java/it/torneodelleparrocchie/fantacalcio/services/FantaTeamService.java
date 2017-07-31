@@ -22,4 +22,6 @@ public interface FantaTeamService {
     void addPlayer(String teamName, String name, String surname) throws FantaException;
 
     void removePlayer(String teamName, String name, String surname) throws FantaException;
+
+    void closeMarket();
 }

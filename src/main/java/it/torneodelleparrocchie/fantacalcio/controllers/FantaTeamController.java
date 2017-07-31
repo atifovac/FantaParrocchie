@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping("/fantasquadra")
 public class FantaTeamController {
 
+    private final FantaTeamService service;
+
     @Autowired
-    private FantaTeamService service;
+    public FantaTeamController(FantaTeamService service) {
+        this.service = service;
+    }
 
     @GetMapping("/{nome}")
     public FantaTeam getFantaTeam(@PathVariable("nome") String name) {
@@ -29,7 +33,7 @@ public class FantaTeamController {
         return service.getFantaTeamList();
     }
 
-    @PutMapping("/")
+    @PostMapping("/new")
     public FantaTeam newFantaTeam(@RequestParam(value = "nome") String name,
                                   @RequestParam(value = "presidente") String president,
                                   @RequestParam(value = "fantasoldi", required = false) int fantaMoney)
@@ -37,31 +41,36 @@ public class FantaTeamController {
         return service.saveFantaTeam(null, name, president, fantaMoney);
     }
 
-    @DeleteMapping("/{nome}")
+    @PostMapping("/{nome}/delete")
     public void deleteFantaTeam(@PathVariable("nome") String name) {
         service.deleteFantaTeam(name);
     }
 
-    @PostMapping("/{vecchioNome}")
-    public FantaTeam updateFantaTeam(@PathVariable(value = "vecchioNome") String oldName,
-                                     @RequestParam(value = "nome", required = false) String name,
+    @PostMapping("/{nome}")
+    public FantaTeam updateFantaTeam(@PathVariable(value = "nome") String oldName,
+                                     @RequestParam(value = "nuovoNome", required = false) String name,
                                      @RequestParam(value = "presidente", required = false) String president,
                                      @RequestParam(value = "fantasoldi", required = false) int fantaMoney)
             throws FantaException {
         return service.saveFantaTeam(oldName, name, president, fantaMoney);
     }
 
-    @PostMapping("/{nomeSquadra}/add")
-    public void addPlayer(@PathVariable(value = "nomeSquadra") String teamName,
-                          @RequestParam(value = "nome") String name,
+    @PostMapping("/{nome}/add")
+    public void addPlayer(@PathVariable(value = "nome") String teamName,
+                          @RequestParam(value = "nomeGiocatore") String name,
                           @RequestParam(value = "cognome") String surname) throws FantaException {
         service.addPlayer(teamName, name, surname);
     }
 
-    @PostMapping("/{nomeSquadra}/remove")
-    public void removePlayer(@PathVariable(value = "nomeSquadra") String teamName,
-                             @RequestParam(value = "nome") String name,
+    @PostMapping("/{nome}/remove")
+    public void removePlayer(@PathVariable(value = "nome") String teamName,
+                             @RequestParam(value = "nomeGiocatore") String name,
                              @RequestParam(value = "cognome") String surname) throws FantaException {
         service.removePlayer(teamName, name, surname);
+    }
+
+    @PostMapping("/close_market")
+    public void closeMarket() {
+        service.closeMarket();
     }
 }
