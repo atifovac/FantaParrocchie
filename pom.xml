@@ -25,6 +25,15 @@
                 <role>Docker Maintainer</role>
             </roles>
         </developer>
+        <developer>
+            <id>deiv10</id>
+            <name>Davide Dellavedova</name>
+            <email>kaos.kein@gmail.com</email>
+            <roles>
+                <role>Tester</role>
+                <role>Fanta Consultant</role>
+            </roles>
+        </developer>
     </developers>
 
     <properties>
